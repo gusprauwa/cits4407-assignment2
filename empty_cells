@@ -1,1 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+inputfile=$1
+delimiter=$2
+
+#tr: to remove \r character
+tr -d '\r' < ${inputfile} | gawk -F"${delimiter}" -f empty_cells.awk 
+#echo head#!/usr/bin/env bash
