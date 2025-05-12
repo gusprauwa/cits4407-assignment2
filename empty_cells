@@ -1,8 +1,29 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-inputfile=$1
-delimiter=$2
+# Check for correct number of arguments
+if [ "$#" -ne 2 ]; then
+    echo "Error: Incorrect number of arguments supplied." >&2
+    echo "Correct input format: $0 <input_file> <delimiter_character>" >&2
+    exit 1
+fi
 
-#tr: to remove \r character
-tr -d '\r' < ${inputfile} | gawk -F"${delimiter}" -f empty_cells.awk 
-#echo head#!/usr/bin/env bash
+inputfile="$1"
+delimiter="$2"
+
+# Check if input file exists
+if [ ! -f "$inputfile" ]; then
+    echo "Error: Input file '$inputfile' not found." >&2
+    exit 1
+fi
+
+# Check if input file is readable
+if [ ! -r "$inputfile" ]; then
+    echo "Error: Input file '$inputfile' is not readable." >&2
+    exit 1
+fi
+
+# tr: Remove characters (\r) from the input file
+tr -d '\r' < "${inputfile}" | gawk -F "${delimiter}" -f empty_cells.awk
+
+# Exit with success status
+exit 0
