@@ -1,3 +1,26 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-max_id=$(sort bgg_dataset.txt -nr | head -n 1 | cut -f1 -d';')
+# Argument Validation
+if [ "$#" -ne 1 ]; then
+    echo "Correct input format: $0 <input_file>" >&2
+    exit 1
+fi
+
+input_file="$1"
+
+if [ ! -f "$input_file" ] || [ ! -r "$input_file" ]; then
+    echo "Error: File '$input_file' not found or not readable." >&2
+    exit 1
+fi
+
+# Generating new IDs for empty ID fields, from the maximum id + 1
+max_id=$(sort $input_file -nr | head -n 1 | cut -f1 -d';')
+
+# Handle Microsoft line endings (remove \r) using sed.
+sed 's/\r$//' "$input_file" | \
+
+# Delete non-ASCII characters using tr.
+tr -cd '\000-\177\n' | \
+
+# Pipe the result to awk
+gawk -v max_id="$max_id" -f preprocess.awk
