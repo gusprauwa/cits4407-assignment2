@@ -2,6 +2,7 @@
 
 # Check if input file is provided
 if [ $# -ne 1 ]; then
+    echo "Error: Incorrect number of arguments supplied." >&2
     echo "Usage: $0 <cleaned_tsv_file>"
     exit 1
 fi
@@ -12,7 +13,11 @@ input_file=$1
 calculate_correlation() {
 }
 
+# Count mechanics and domain (split by comma and count each one)
+awk -F'\t' -f count_mechanics_domains.awk "$input_file"
+
 echo "The correlation between the year of publication and the average rating is "
 
 
 echo "The correlation between the complexity of a game and its average rating is "
+
