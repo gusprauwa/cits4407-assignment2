@@ -1,8 +1,20 @@
 #!/usr/bin/env bash
 
+# preprocess: Cleans a given board game dataset file.
+#
+# This script performs the following transformations:
+# 1. Converts semicolon (;) separators to tab characters.
+# 2. Convert the Microsoft line endings to Unix line endings.
+# 3. Changes the format of floating-point numbers to use '.' instead of ',' as the decimal point.
+# 4. Deletes non-ASCII characters.
+# 5. Generates new unique IDs for rows with empty ID fields.
+#
+# Usage: preprocess <input_file>
+
+
 # Argument Validation
 if [ "$#" -ne 1 ]; then
-    echo "Correct input format: $0 <input_file>" >&2
+    echo "Correct Input Format: $0 <input_file>" >&2
     exit 1
 fi
 

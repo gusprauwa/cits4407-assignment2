@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
+# empty_cells: Checks a delimited text file for empty cells in 
+#              each column and reports the count per column.
+# Usage: empty_cells.sh <input_file> <delimiter_character>
+
 # Check for correct number of arguments
 if [ "$#" -ne 2 ]; then
     echo "Error: Incorrect number of arguments supplied." >&2
-    echo "Correct input format: $0 <input_file> <delimiter_character>" >&2
+    echo "Correct Input Format: $0 <input_file> <delimiter_character>" >&2
     exit 1
 fi
 
