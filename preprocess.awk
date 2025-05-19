@@ -1,3 +1,7 @@
+# preprocess.awk: Cleans and transforms data from a semicolon-separated file.
+# Input: A semicolon-separated file. Expects 'max_id' to be passed as a variable
+# Output: Prints the transformed data with tab as the separator.
+
 BEGIN {
     # Change field separator to tab
     FS = ";";   
